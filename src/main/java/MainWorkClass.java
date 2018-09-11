@@ -26,9 +26,9 @@ public static void main (String[] args) throws SQLException {
 
     DepModule depModule = new DepModule(driver);
     if(URL.equals("http://10.10.17.40:8080/barsroot/account/login/")){
-        depModule.openCustCard("0000000000", "319791901");     //  для "http://10.10.17.40:8080/barsroot/"
+        depModule.openCustCard("0000000000", "319791901");
     }
-    else if(URL.equals("http://10.10.17.22:8080/barsroot/account/login/")){    //для "http://10.10.17.22:8080/barsroot/"
+    else if(URL.equals("http://10.10.17.22:8080/barsroot/account/login/")){
         depModule.openCustCard("0000000000", "96281701");
     }
     else {

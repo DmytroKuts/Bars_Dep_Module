@@ -27,10 +27,12 @@ public class DepModule {
        // topFunction.VoidXpath60sec(ArmWorkWithCust);
         driver.findElement(ArmWorkWithCust).click();
         driver.findElement(StartWorkWithCust).click();
+
         driver.switchTo().frame(driver.findElement(By.id("mainFrame")));
         topFunction.VoidXpath10sec(textClientCode);
         driver.findElement(textClientCode).sendKeys(okpo);
         driver.findElement(btSearch).click();
+
         topFunction.VoidXpath10sec(ddlSearchClient);
         getSelect(driver.findElement(this.ddlSearchClient));
         select.selectByValue(customerRnk);
