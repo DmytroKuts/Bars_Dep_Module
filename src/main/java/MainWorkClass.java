@@ -35,7 +35,8 @@ public static void main (String[] args) throws SQLException {
         depModule.openCustCard("0000000000", "97709601");  //для "http://10.10.17.50:8080/barsroot/"
     }
 
-//    RegistratCard registratCard = new RegistratCard(driver);
+//    RegistratCard registratCard = new RegistratCard
+// (driver);
 //    registratCard.registratCard("SALARY", "1301",
 //            "SAL_UAH_2_33_MSTNDDEB_36_3",
 //            "36",
