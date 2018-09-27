@@ -1,13 +1,9 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+
+import static com.codeborne.selenide.Selenide.$;
 
 public class Come3Branch {
-    WebDriver driver ;
     TopFunction topFunction;
-
-
-    public Come3Branch(WebDriver driver) { this.driver = driver;
-    this.topFunction = new TopFunction(this.driver);}
 
     private By btnBranches1 = By.xpath("//a[@id='btnBranches']");
     private By btnBranchesSl = By.xpath("//div[@id='treeview']//ul[@class = 'k-group']//span[@class='k-icon k-plus']");
@@ -17,12 +13,10 @@ public class Come3Branch {
 
     public Come3Branch сome3Branch (){
         topFunction.VoidXpath60sec(btnBranches1);
-        driver.findElement(btnBranches1).click() ;
-        driver.findElement(btnBranchesSl).click();
-        topFunction.VoidXpath10sec(btnBranches2);
-        driver.findElement(btnBranches2).click();
-        topFunction.VoidXpath10sec(btnBranches3);
-        driver.findElement(btnBranches3).click();
-        return new Come3Branch(driver);
+        $(btnBranches1).click();
+        $(btnBranchesSl).click();
+        $(btnBranches2).click();
+        $(btnBranches3).click();
+        return new Come3Branch();
     }
     }
