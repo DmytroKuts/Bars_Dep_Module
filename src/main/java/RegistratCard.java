@@ -1,15 +1,14 @@
+import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-public class RegistratCard {
-    WebDriver driver ;
-    TopFunction topFunction;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.switchTo;
 
-    public RegistratCard(WebDriver driver) { this.driver = driver;
-        this.topFunction = new TopFunction(this.driver);
-    }
+public class RegistratCard {
+
+    TopFunction topFunction;
     private  static Select select;
     private By btContracts = By.xpath("//*[@id='btContracts']");
     private By CardRah = By.xpath("//*[@id='__tab_TabMainContainer_TabBPK']");
@@ -24,43 +23,33 @@ public class RegistratCard {
     private By btnClientCard = By.xpath("//*[@id='btnClientCard']");
 
     public RegistratCard registratCard (String ProductGrp, String ProjectZP, String CardName, String MonthsOpenCard, String SecretWord ){
-        topFunction.VoidXpath60sec(btContracts);
-        driver.findElement(btContracts).click();
+        $(btContracts).click();
+        $(CardRah).click();
+        $(CreateRah).click();
 
-        topFunction.VoidXpath10sec(CardRah);
-        driver.findElement(CardRah).click();
-
-        topFunction.VoidXpath10sec(CreateRah);
-        driver.findElement(CreateRah).click();
-
-        topFunction.VoidXpath10sec(listProductGrp);
-        getSelect(driver.findElement(this.listProductGrp));
+        getSelect($(this.listProductGrp).shouldBe(Condition.visible));
         select.selectByValue(ProductGrp);
 
-        topFunction.userDelay(3000);
-        getSelect(driver.findElement(this.listProjectZP));
+        //topFunction.sleep(3000);
+        getSelect($(this.listProjectZP).shouldBe(Condition.visible));
         select.selectByValue(ProjectZP);
 
-        topFunction.userDelay(3000);
-        getSelect(driver.findElement(this.listCard));
+       // topFunction.sleep(3000);
+        getSelect($(this.listCard).shouldBe(Condition.visible));
         select.selectByValue(CardName);
 
-        topFunction.userDelay(3000);
-        driver.findElement(textMonths).sendKeys(MonthsOpenCard);
-        driver.findElement(textSecretWord).sendKeys(SecretWord);
-        driver.findElement(btnRegisterCard).click();
+        //topFunction.sleep(3000);
+        $(textMonths).shouldBe(Condition.visible).sendKeys(MonthsOpenCard);
+        $(textSecretWord).sendKeys(SecretWord);
+        $(btnRegisterCard).click();
 
-        topFunction.userDelay(5000);
-        driver.switchTo().alert().accept();
+        //topFunction.sleep(6000);
+        switchTo().alert().accept();
 
-        topFunction.VoidXpath10sec(btnBack);
-        driver.findElement(btnBack).click();
+        $(btnBack).click();
+        $(btnClientCard).click();
 
-        topFunction.VoidXpath10sec(btnClientCard);
-        driver.findElement(btnClientCard).click();
-
-
-        return new RegistratCard(driver);
+        return new RegistratCard();
     }
 
     public static Select getSelect(WebElement element) {

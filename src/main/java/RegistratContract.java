@@ -1,17 +1,20 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import static com.codeborne.selenide.Condition.enabled;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+
 public class RegistratContract {
-    WebDriver driver ;
     TopFunction topFunction;
     private  static Select select;
 
-    public RegistratContract(WebDriver driver) { this.driver = driver;
-        this.topFunction = new TopFunction(this.driver);
+    public RegistratContract() {
+        this.topFunction = new TopFunction();
     }
-    //private String mainWindow = driver.getWindowHandle();
+
     private By btContracts = By.xpath("//*[@id='btContracts']");
     private By btCreateContract = By.xpath("//*[@id='TabMainContainer_TabDeposit_TabDepositContainer_TabContractMain_btCreateContract']");
     private By listTypes = By.xpath("//*[@id='listTypes']");
@@ -20,62 +23,54 @@ public class RegistratContract {
     private By textContractSum = By.xpath("//*[@id='textContractSum']");
     private By btnAccounts = By.xpath("//*[@id='btnAccounts']");
     private By btnSubmit = By.xpath("//*[@id='btnSubmit']");
-    private By ValAcc = By.xpath("//tr[@id='r_1']/td[2]");     //td[contains(text(), '26209503197919')
+    private By ValAcc = By.xpath("//tr[@id='r_1']/td[3]");     //td[contains(text(), '26209503197919')
     private By btNext = By.xpath("//*[@id='btNext']");
     private By textContractNumber = By.xpath("//*[@id='textContractNumber']");
     private By eadPrintContract_ibPrint = By.xpath("//*[@id='eadPrintContract_ibPrint']");
 
 
     public RegistratContract кegistratContract (String listTypesAc, String listCurrencyAc, String listContractTypeAc, String textContractSumAc){
-        //String getWindowHandle = driver.getWindowHandle();
 
-        topFunction.VoidXpath60sec(btContracts);
-        driver.findElement(btContracts).click();
+        $(btContracts).shouldBe(enabled).click() ;
 
-        topFunction.VoidXpath60sec(btCreateContract);
-        driver.findElement(btCreateContract).click();
+        $(btCreateContract).click();
 
-        topFunction.VoidXpath60sec(listTypes);
-        getSelect(driver.findElement(this.listTypes));
+        getSelect($(listTypes));
         select.selectByValue(listTypesAc);
 
-        topFunction.userDelay(3000);
-        getSelect(driver.findElement(this.listCurrency));
+        sleep(3000);
+        getSelect($(listCurrency));
         select.selectByValue(listCurrencyAc);
 
-        topFunction.userDelay(3000);
-        getSelect(driver.findElement(this.listContractType));
+        getSelect($(listContractType));
         select.selectByValue(listContractTypeAc);
 
-        topFunction.userDelay(3000);
-        driver.findElement(textContractSum).clear();
-        driver.findElement(textContractSum).sendKeys(textContractSumAc);
-        driver.findElement(btnSubmit).click();
+        topFunction.sleep(3000);
+        $(textContractSum).clear();
+        $(textContractSum).sendKeys(textContractSumAc);
+        $(btnSubmit).click();
 
-
-        topFunction.VoidXpath60sec(btnAccounts);
-        String getWindowHandle2 = driver.getWindowHandle();
-        //String getWindowHandle3 = driver.getPageSource();
-        driver.findElement(btnAccounts).click();
-        for(String windowsHandles : driver.getWindowHandles()){
+        sleep(2000);
+        String getWindowHandle2 =  getWebDriver().getWindowHandle();
+        $(btnAccounts).click();
+        for(String windowsHandles : getWebDriver().getWindowHandles()){
             if(!windowsHandles.equals(getWindowHandle2)){
-                driver.switchTo().window(windowsHandles);
-               // driver.manage().window().maximize();
+                getWebDriver().switchTo().window(windowsHandles);
+                getWebDriver().manage().window().maximize();
             }
-            driver.switchTo().window(windowsHandles);
+            getWebDriver().switchTo().window(windowsHandles);
         }
 
-        topFunction.userDelay(3000);
-        driver.findElement(ValAcc).click();
+        sleep(2000);
+        //$(ValAcc).click();
+        getWebDriver().findElement(ValAcc).click();
 
-        topFunction.userDelay(3000);
-
-        driver.switchTo().window(getWindowHandle2);
-        driver.switchTo().frame(driver.findElement(By.id("mainFrame")));
-        driver.findElement(btNext).click();
+        getWebDriver().switchTo().window(getWindowHandle2);
+        getWebDriver().switchTo().frame($(By.id("mainFrame")));
+        $(btNext).shouldBe(enabled).click();
 
 
-        return new RegistratContract(driver);
+        return new RegistratContract();
     }
 
     public static Select getSelect(WebElement element) {

@@ -6,15 +6,10 @@ import static com.codeborne.selenide.WebDriverRunner.url;
 public class MainWorkClass {
 
 public static void main (String[] args)  {
-   /* System.setProperty("webdriver.ie.driver", "C:\\Users\\dmytro.kuts\\IdeaProjects\\Selenium_Test\\src\\test\\driver\\IEDriverServer.exe");
-    WebDriver driver = new InternetExplorerDriver();
-    driver.manage().window().maximize();
-    driver.get("http://10.10.17.22:8080/barsroot/account/login/");*/
-
 
     System.setProperty("webdriver.ie.driver", "C:\\Users\\dmytro.kuts\\IdeaProjects\\Selenium_Test\\src\\test\\driver\\IEDriverServer.exe");
     Configuration.browser = "ie";
-    open("http://10.10.17.22:8080/barsroot/account/login/");
+    open("http://10.10.17.50:8080/barsroot/account/login/");
 
     String URL = url();
 
@@ -34,8 +29,8 @@ public static void main (String[] args)  {
 
 
     ////////////////// Используя уже созданного клиента открываем Карточку Клиента \\\\\\\\\\\\\\\\\\\\\\
-/*
-    DepModule depModule = new DepModule(driver);
+
+    DepModule depModule = new DepModule();
     if(URL.equals("http://10.10.17.40:8080/barsroot/account/login/")){
         depModule.openCustCard("0000000000", "319791901");
     }
@@ -48,12 +43,12 @@ public static void main (String[] args)  {
 
     /////////////////// Создаем по клиенту карточный счет, передаем параметры карточки \\\\\\\\\\\\\\\\\\\\\\\\\
 
-    RegistratCard registratCard = new RegistratCard(driver);
+    RegistratCard registratCard = new RegistratCard();
     registratCard.registratCard("SALARY", "1301",
             "SAL_UAH_2_33_MSTNDDEB_36_3",
             "36",
             "qqq");
-
+/*
     //////////////////// Создаем по клиенту депозит, передаем параметры депозита \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
    RegistratContract registratContract = new RegistratContract(driver);

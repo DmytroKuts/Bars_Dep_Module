@@ -1,18 +1,16 @@
+import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.switchTo;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+
 public class DepModule {
-
-    WebDriver driver ;
     TopFunction topFunction;
-
-    public DepModule (WebDriver driver) { this.driver = driver;
-        this.topFunction = new TopFunction(this.driver);
-    }
-
-    private By ArmWorkWithCust = By.xpath("//div[@class ='menuTitle']//td[contains(text(), 'АРМ Робота з клієнтом ')]");
+    private By ArmWorkWithCust = By.xpath("//div[@class ='menuTitle']//td[contains(text(), 'АРМ Робота з клієнтом')]");
     private By StartWorkWithCust = By.xpath("//div [@id ='oper-4495']");
     private By textClientCode = By.xpath("//*[@id='textClientCode']");
     private By btSearch = By.xpath("//*[@id='btSearch']");
@@ -20,25 +18,28 @@ public class DepModule {
     private By btClientCard = By.xpath("//*[@id='btClientCard']");
     private  static Select select;
 
+    public DepModule() {
+        this.topFunction = new TopFunction();
+    }
 
     public DepModule openCustCard (String okpo, String customerRnk){
 
-        topFunction.userDelay(15000);
-       // topFunction.VoidXpath60sec(ArmWorkWithCust);
-        driver.findElement(ArmWorkWithCust).click();
-        driver.findElement(StartWorkWithCust).click();
+        topFunction.sleep(5000);
 
-        driver.switchTo().frame(driver.findElement(By.id("mainFrame")));
-        topFunction.VoidXpath10sec(textClientCode);
-        driver.findElement(textClientCode).sendKeys(okpo);
-        driver.findElement(btSearch).click();
+        $(By.id("btnBranches")).waitUntil(Condition.visible, 5000);
+        ((JavascriptExecutor)getWebDriver()).executeScript("arguments[0].scrollIntoView();", $(ArmWorkWithCust));
 
-        topFunction.VoidXpath10sec(ddlSearchClient);
-        getSelect(driver.findElement(this.ddlSearchClient));
+        $(ArmWorkWithCust).click();
+        $(StartWorkWithCust).click();
+
+        switchTo().frame($("#mainFrame"));
+        $(textClientCode).sendKeys(okpo);
+        $(btSearch).click();
+
+        getSelect($(this.ddlSearchClient));
         select.selectByValue(customerRnk);
-        topFunction.userDelay(5000);
-        driver.findElement(btClientCard).click();
-        return new DepModule(driver);
+        $(btClientCard).click();
+        return new DepModule();
     }
 
     public static Select getSelect(WebElement element) {
