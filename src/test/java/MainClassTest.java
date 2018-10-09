@@ -19,7 +19,7 @@ public class MainClassTest {
         if (URL.equals("http://10.10.17.40:8080/barsroot/account/login/") ||
                 URL.equals("http://10.10.17.22:8080/barsroot/account/login/") ||
                 URL.equals("http://10.10.17.50:8080/barsroot/account/login/")) {
-            registration.registerUserPass("qwerty", "absadm01");
+             registration.registerUserPass("qwerty", "absadm01");
         } else {
             registration.registerUserPass("qwerty123", "absadm"); //для "http://10.10.17.46:8080/barsroot/"
         }
