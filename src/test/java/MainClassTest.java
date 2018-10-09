@@ -14,7 +14,7 @@ public class MainClassTest {
         open("http://10.10.17.50:8080/barsroot/account/login/");
         Configuration.closeBrowserTimeoutMs = Long.parseLong(System.getProperty("selenide.closeBrowserTimeout", "25000"));;
 
-        String URL = url();
+        String URL =  url();
         Registration registration = new Registration();
         if (URL.equals("http://10.10.17.40:8080/barsroot/account/login/") ||
                 URL.equals("http://10.10.17.22:8080/barsroot/account/login/") ||
