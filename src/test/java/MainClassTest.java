@@ -11,12 +11,12 @@ public class MainClassTest {
     public static void BeforeClassMethod() {
         System.setProperty("webdriver.ie.driver", "C:\\Users\\dmytro.kuts\\IdeaProjects\\Selenium_Test\\src\\test\\driver\\IEDriverServer.exe");
         Configuration.browser = "ie";
-        open("http://10.10.17.50:8080/barsroot/account/login/");
-        Configuration.closeBrowserTimeoutMs = Long.parseLong(System.getProperty("selenide.closeBrowserTimeout", "25000"));;
+        open("http://10.10.17.40:8080/barsroot/account/login/");
+        Configuration.holdBrowserOpen=true;
 
         String URL =  url();
         Registration registration = new Registration();
-        if (URL.equals("http://10.10.17.40:8080/barsroot/account/login/") ||
+        if (URL.equals("http://10.10.17.22:8080/barsroot/account/login/") ||
                 URL.equals("http://10.10.17.22:8080/barsroot/account/login/") ||
                 URL.equals("http://10.10.17.50:8080/barsroot/account/login/")) {
              registration.registerUserPass("qwerty", "absadm01");
@@ -59,6 +59,6 @@ public class MainClassTest {
         RegistratContract registratContract = new RegistratContract();
         registratContract.кegistratContract("48", "980",
                 "2063", "100000");
-
     }
+
 }

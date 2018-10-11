@@ -34,18 +34,19 @@ public class RegistratContract {
         $(btContracts).shouldBe(enabled).click() ;
 
         $(btCreateContract).click();
-
+        sleep(1000);
         getSelect($(listTypes));
         select.selectByValue(listTypesAc);
 
-        sleep(3000);
+        sleep(1000);
         getSelect($(listCurrency));
         select.selectByValue(listCurrencyAc);
 
+        sleep(1000);
         getSelect($(listContractType));
         select.selectByValue(listContractTypeAc);
 
-        topFunction.sleep(3000);
+        sleep(3000);
         $(textContractSum).clear();
         $(textContractSum).sendKeys(textContractSumAc);
         $(btnSubmit).click();
