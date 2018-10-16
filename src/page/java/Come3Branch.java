@@ -11,11 +11,11 @@ public class Come3Branch {
     private By btnBranches3 = By.xpath("//*[@id='treeview_tv_active']/ul/li/div/span/span[1]");
 
 
-    public Come3Branch сome3Branch (){
+    public Come3Branch сome3Branch() {
         $(btnBranches1).click();
         $(btnBranchesSl).click();
         $(btnBranches2).click();
         $(btnBranches3).click();
         return new Come3Branch();
     }
-    }
+}

@@ -1,3 +1,5 @@
+import com.codeborne.selenide.Condition;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -9,7 +11,7 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class RegistratContract {
     TopFunction topFunction;
-    private  static Select select;
+    private static Select select;
 
     public RegistratContract() {
         this.topFunction = new TopFunction();
@@ -25,21 +27,21 @@ public class RegistratContract {
     private By btnSubmit = By.xpath("//*[@id='btnSubmit']");
     private By ValAcc = By.xpath("//tr[@id='r_1']/td[3]");     //td[contains(text(), '26209503197919')
     private By btNext = By.xpath("//*[@id='btNext']");
-    private By textContractNumber = By.xpath("//*[@id='textContractNumber']");
+    private By lbInfo = By.xpath("//*[@id='lbInfo']");
     private By eadPrintContract_ibPrint = By.xpath("//*[@id='eadPrintContract_ibPrint']");
 
 
-    public RegistratContract кegistratContract (String listTypesAc, String listCurrencyAc, String listContractTypeAc, String textContractSumAc){
+    public RegistratContract кegistratContract(String listTypesAc, String listCurrencyAc, String listContractTypeAc, String textContractSumAc) {
 
-        $(btContracts).shouldBe(enabled).click() ;
+        //$(btContracts).shouldBe(enabled).click() ;
 
-        $(btCreateContract).click();
+        $(btCreateContract).shouldBe(enabled).click();
         sleep(1000);
         getSelect($(listTypes));
         select.selectByValue(listTypesAc);
 
-        sleep(1000);
-        getSelect($(listCurrency));
+        sleep(2000);
+        getSelect($(listCurrency).shouldBe(Condition.visible));
         select.selectByValue(listCurrencyAc);
 
         sleep(1000);
@@ -51,18 +53,18 @@ public class RegistratContract {
         $(textContractSum).sendKeys(textContractSumAc);
         $(btnSubmit).click();
 
-        sleep(2000);
-        String getWindowHandle2 =  getWebDriver().getWindowHandle();
+        sleep(4000);
+        String getWindowHandle2 = getWebDriver().getWindowHandle();
         $(btnAccounts).click();
-        for(String windowsHandles : getWebDriver().getWindowHandles()){
-            if(!windowsHandles.equals(getWindowHandle2)){
+        for (String windowsHandles : getWebDriver().getWindowHandles()) {
+            if (!windowsHandles.equals(getWindowHandle2)) {
                 getWebDriver().switchTo().window(windowsHandles);
                 getWebDriver().manage().window().maximize();
             }
             getWebDriver().switchTo().window(windowsHandles);
         }
 
-        sleep(2000);
+        sleep(4000);
         //$(ValAcc).click();
         getWebDriver().findElement(ValAcc).click();
 
@@ -70,6 +72,7 @@ public class RegistratContract {
         getWebDriver().switchTo().frame($(By.id("mainFrame")));
         $(btNext).shouldBe(enabled).click();
 
+        Assert.assertEquals( "Картка вкладу №", $(lbInfo).getText());
 
         return new RegistratContract();
     }

@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.switchTo;
 
 public class RegistratCard {
 
-    private  static Select select;
+    private static Select select;
     private By btContracts = By.xpath("//*[@id='btContracts']");
     private By CardRah = By.xpath("//*[@id='__tab_TabMainContainer_TabBPK']");
     private By CreateRah = By.xpath("//*[@id='TabMainContainer_TabBPK_btnCreateCard']");
@@ -20,10 +20,10 @@ public class RegistratCard {
     private By textSecretWord = By.xpath("//*[@id='textSecretWord']");
     private By btnRegisterCard = By.xpath("//*[@id='btnRegisterCard']");
     private By btnBack = By.xpath("//*[@id='btnBack']");
-    private By btnClientCard = By.xpath("//*[@id='btnClientCard']");
 
-    public RegistratCard registratCard (String ProductGrp, String ProjectZP, String CardName, String MonthsOpenCard, String SecretWord ){
-        $(btContracts).click();
+
+    public RegistratCard registratCard(String ProductGrp, String ProjectZP, String CardName, String MonthsOpenCard, String SecretWord) {
+        // $(btContracts).click();
         $(CardRah).click();
         $(CreateRah).click();
 
@@ -38,8 +38,6 @@ public class RegistratCard {
         getSelect($(this.listCard).shouldBe(Condition.visible));
         select.selectByValue(CardName);
 
-
-
         sleep(2000);
         $(textMonths).shouldBe(Condition.visible).sendKeys(MonthsOpenCard);
         $(textSecretWord).sendKeys(SecretWord);
@@ -49,7 +47,7 @@ public class RegistratCard {
         switchTo().alert().accept();
 
         $(btnBack).click();
-        $(btnClientCard).click();
+        //$(btnClientCard).click();
 
         return new RegistratCard();
     }
