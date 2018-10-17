@@ -12,7 +12,7 @@ public class MainClassTest {
     public static void BeforeClassMethod() {
         System.setProperty("webdriver.ie.driver", "C:\\Users\\dmytro.kuts\\IdeaProjects\\Selenium_Test\\src\\test\\driver\\IEDriverServer.exe");
         Configuration.browser = "ie";
-        open("http://10.10.17.50:8080/barsroot/account/login/");
+        open("http://10.10.17.22:8080/barsroot/account/login/");
         Configuration.holdBrowserOpen = true;
 
         String URL = url();
@@ -59,6 +59,7 @@ public class MainClassTest {
         }
     }
 
+////////////////////////// Создаем депозит
     @Test
     public void registratContract() {
         RegistratContract registratContract = new RegistratContract();
