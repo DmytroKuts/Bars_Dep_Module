@@ -48,7 +48,7 @@ public class RegistratContract {
         getSelect($(listContractType));
         select.selectByValue(listContractTypeAc);
 
-        sleep(3000);
+        sleep(5000);
         $(textContractSum).clear();
         $(textContractSum).sendKeys(textContractSumAc);
         $(btnSubmit).click();
