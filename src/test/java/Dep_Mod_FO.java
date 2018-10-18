@@ -2,11 +2,12 @@ import com.codeborne.selenide.Configuration;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static com.codeborne.selenide.Configuration.fastSetValue;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.url;
 
-public class MainClassTest {
+public class Dep_Mod_FO {
 
     @BeforeClass
     public static void BeforeClassMethod() {
@@ -14,6 +15,7 @@ public class MainClassTest {
         Configuration.browser = "ie";
         open("http://10.10.17.22:8080/barsroot/account/login/");
         Configuration.holdBrowserOpen = true;
+        fastSetValue = true;
 
         String URL = url();
         Registration registration = new Registration();
@@ -29,7 +31,7 @@ public class MainClassTest {
         ///////////////////// Логинимся под 3-м бранчом
 
         Come3Branch come3Branch = new Come3Branch();
-        come3Branch.сome3Branch();
+        come3Branch.сome3Branch(3);
 
         ////////////////// Используя уже созданного клиента открываем Карточку Клиента
 
