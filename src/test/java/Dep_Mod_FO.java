@@ -1,7 +1,6 @@
 import com.codeborne.selenide.Configuration;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import static com.codeborne.selenide.Configuration.fastSetValue;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.open;
@@ -13,7 +12,7 @@ public class Dep_Mod_FO {
     public static void BeforeClassMethod() {
         System.setProperty("webdriver.ie.driver", "C:\\Users\\dmytro.kuts\\IdeaProjects\\Selenium_Test\\src\\test\\driver\\IEDriverServer.exe");
         Configuration.browser = "ie";
-        open("http://10.10.17.22:8080/barsroot/account/login/");
+        open("http://10.10.17.50:8080/barsroot/account/login/");
         Configuration.holdBrowserOpen = true;
         fastSetValue = true;
 
