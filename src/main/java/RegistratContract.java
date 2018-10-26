@@ -35,8 +35,8 @@ public class RegistratContract {
         select.selectByValue(listTypesAc);
 
         sleep(2000);
-        getSelect(listCurrency.shouldBe(Condition.visible));
-        select.selectByValue(listCurrencyAc);
+        getSelect(listCurrency.shouldBe(Condition.visible)).selectByValue(listCurrencyAc);
+        //select.selectByValue(listCurrencyAc);
 
         sleep(1000);
         getSelect(listContractType);
