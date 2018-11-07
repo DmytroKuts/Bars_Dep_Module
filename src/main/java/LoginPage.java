@@ -24,10 +24,10 @@ public   class LoginPage {
         Configuration.holdBrowserOpen = true;
         getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         String URL = url();
-       // Registration registration = new Registration();
         if (URL.equals("http://10.10.17.22:8080/barsroot/account/login/") ||
                 URL.equals("http://10.10.17.40:8082/barsroot/account/login/") ||
                 URL.equals("http://10.10.17.50:8080/barsroot/account/login/") ||
+                URL.equals("http://10.10.10.198:11111/barsroot/account/login/") ||
                 URL.equals("http://10.10.17.40:8080/barsroot/account/login/")) {
             RegisterUserPass("qwerty", "absadm01");
         } else {

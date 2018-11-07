@@ -1,6 +1,8 @@
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.logging.Logger;
+
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.WebDriverRunner.url;
 
@@ -9,48 +11,61 @@ public class Dep_Mod_FO {
     @BeforeClass
     public static void BeforeClassMethod() {
         LoginPage loginPage = new LoginPage();
-        loginPage.LoginPageStart("http://10.10.17.50:8080/barsroot/account/login/", "ie");
+        Logger log = Logger.getLogger(Dep_Mod_FO.class.getName());
+        log.info("*** Старт логина ФО***");
+        loginPage.LoginPageStart("http://10.10.17.50:8080/barsroot/", "ie");
 
-        String URL = url();
-
-        ///////////////////// Логинимся под 3-м бранчом
-
+        log.info("*** Логинимся под 3-м бранчом ФО***");
         Come3Branch come3Branch = new Come3Branch();
         come3Branch.сome3Branch(3);
 
-        ////////////////// Используя уже созданного клиента открываем Карточку Клиента
-
+        log.info("*** Используя уже созданного клиента открываем Карточку Клиент ФО***");
         DepModule depModule = new DepModule();
-        if (URL.equals("http://10.10.17.40:8080/barsroot/account/login/")) {
-            depModule.openCustCard("0000000000", "319791901");
-        } else if (URL.equals("http://10.10.17.22:8080/barsroot/account/login/") ||
-                (URL.equals("http://10.10.17.40:8082/barsroot/account/login/") )) {
-            depModule.openCustCard("0000000000", "96281701");
-        } else {
-            depModule.openCustCard("0000000000", "97709601");  //для "http://10.10.17.50:8080/barsroot/"
-        }
+        depModule.depModule(url());
     }
-
 
     @Test
-/////////////////// Создаем по клиенту карточный счет, передаем параметры карточки
     public void registratCard() {
-        try {
-            RegistratCard registratCard = new RegistratCard();
-            registratCard.registratCard("SALARY", "1301",
-                    "SAL_UAH_2_33_MSTNDDEB_36_3",
-                    "36",
-                    "qqq");
-        } catch (Exception e) {
-            $x("//*[@id='btnBack']").click();
+        Logger log = Logger.getLogger(Dep_Mod_FO.class.getName());
+        log.info("***Создаем по клиенту карточный счет, передаем параметры карточки ФО***");
+        if ( url().equals("http://10.10.10.198:11111/barsroot/account/login/")) {
+            try {
+                RegistratCard registratCard = new RegistratCard();
+                registratCard.registratCard("PENSION", "-1", "980",
+                        "PENS_SOC_UAH_24",
+                        "PENS_SOC_UAH_24_MDUKKPP_0",
+                        "60",
+                        "qqq");
+            } catch (Exception e) {
+                $x("//*[@id='btnBack']").click();
+                throw new NullPointerException("Test is in exeption 198:111111");
+            }
         }
-    }
-
-////////////////////////// Создаем депозит
+            else {
+                try {
+                    RegistratCard registratCard = new RegistratCard();
+                    registratCard.registratCard("SALARY", "1301","980",
+                            "SAL_UAH_2_33",
+                            "SAL_UAH_2_33_MSTNDDEB_36_3",
+                            "36",
+                            "qqq");
+                } catch (Exception e) {
+                    $x("//*[@id='btnBack']").click();
+                    throw new NullPointerException("Test is in exeption " + url() + e.getStackTrace());
+                }
+            }
+            }
     @Test
     public void registratContract() {
+        Logger log = Logger.getLogger(Dep_Mod_FO.class.getName());
+        log.info("*** Создаем депозит ФО ***");
         RegistratContract registratContract = new RegistratContract();
         registratContract.кegistratContract("48", "980",
                 "2063", "100000");
     }
+
+    /*@AfterClass
+    public static void exit() {
+        Selenide.close();
+    }*/
 }

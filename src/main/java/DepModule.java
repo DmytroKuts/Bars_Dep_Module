@@ -19,7 +19,22 @@ public class DepModule {
     private SelenideElement btClientCard = $(By.id("btClientCard"));
     private static Select select;
 
-    public DepModule openCustCard(String okpo, String customerRnk) {
+
+    public DepModule depModule(String url) {
+        if (url.equals("http://10.10.17.40:8080/barsroot/")) {
+            openCustCard("0000000000", "319791901");
+        } else if (url.equals("http://10.10.17.22:8080/barsroot/") ||
+                  (url.equals("http://10.10.17.40:8082/barsroot/") ||
+                        (url.equals("http://10.10.10.198:11111/barsroot/")))) {
+            openCustCard("0000000000", "96281701");
+        } else {
+            openCustCard("0000000000", "97709601");  //для "http://10.10.17.50:8080/barsroot/"
+        }
+        return new DepModule();
+    }
+
+
+    private DepModule openCustCard(String okpo, String customerRnk) {
 
         sleep(5000);
 
@@ -40,7 +55,7 @@ public class DepModule {
         return new DepModule();
     }
 
-    public static Select getSelect(WebElement element) {
+    public  Select getSelect(WebElement element) {
         select = new Select(element);
         return select;
     }
