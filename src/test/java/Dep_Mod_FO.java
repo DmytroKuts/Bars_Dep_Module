@@ -1,3 +1,5 @@
+import com.codeborne.selenide.Selenide;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -64,8 +66,8 @@ public class Dep_Mod_FO {
                 "2063", "100000");
     }
 
-    /*@AfterClass
+    @AfterClass
     public static void exit() {
         Selenide.close();
-    }*/
+    }
 }

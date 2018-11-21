@@ -24,8 +24,9 @@ public class DepModule {
         if (url.equals("http://10.10.17.40:8080/barsroot/")) {
             openCustCard("0000000000", "319791901");
         } else if (url.equals("http://10.10.17.22:8080/barsroot/") ||
+                  (url.equals("http://10.10.17.24:8080/barsroot/") ||
                   (url.equals("http://10.10.17.40:8082/barsroot/") ||
-                        (url.equals("http://10.10.10.198:11111/barsroot/")))) {
+                        (url.equals("http://10.10.10.198:11111/barsroot/"))))) {
             openCustCard("0000000000", "96281701");
         } else {
             openCustCard("0000000000", "97709601");  //для "http://10.10.17.50:8080/barsroot/"

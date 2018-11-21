@@ -28,6 +28,7 @@ public   class LoginPage {
                 URL.equals("http://10.10.17.40:8082/barsroot/account/login/") ||
                 URL.equals("http://10.10.17.50:8080/barsroot/account/login/") ||
                 URL.equals("http://10.10.10.198:11111/barsroot/account/login/") ||
+                URL.equals("http://10.10.17.24:8080/barsroot/account/login/") ||
                 URL.equals("http://10.10.17.40:8080/barsroot/account/login/")) {
             RegisterUserPass("qwerty", "absadm01");
         } else {

@@ -1,10 +1,12 @@
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import java.util.logging.Logger;
 
 public class Dep_Mod_UO {
     @BeforeClass
-    public static void BeforeClassMethod() {
+    public static void beforeClassMethod() {
         LoginPage loginPage = new LoginPage();
         loginPage.LoginPageStart("http://10.10.17.50:8080/barsroot/", "ie");
         Logger log = Logger.getLogger(Dep_Mod_UO.class.getName());
@@ -18,21 +20,21 @@ public class Dep_Mod_UO {
         dep_UO.open_Dep_UO();
     }
     @Test
-    public void CreateDep_UO_999999999() {
+    public void сreateDep_UO_999999999() {
         Dep_UO dep_UO = new Dep_UO();
         dep_UO.registrat_Dep_UO("98116101", "4", "980", "2600830282", "9999999999", "2");
         }
 
     @Test
-    public void CreateDep_UO_5() {
+    public void сreateDep_UO_5() {
         Dep_UO dep_UO2 = new Dep_UO();
         dep_UO2.registrat_Dep_UO("98116101", "4", "980", "2600830282", "1", "2");
     }
 
     @Test
-    public void CreateDep_UO_0() {
-        Dep_UO dep_UO2 = new Dep_UO();
-        dep_UO2.registrat_Dep_UO("98116101", "4", "980", "2600830282", "0", "2");
+    public void CreateDep_UO_NULL() {
+        Dep_UO dep_UO3 = new Dep_UO();
+        Assert.assertEquals(dep_UO3.registrat_Dep_UO_All_Null(), "Is Displayed = truetruetruetruetrue");
     }
 }
 
