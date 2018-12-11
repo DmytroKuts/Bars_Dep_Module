@@ -59,7 +59,12 @@ public class Dep_UO {
 
         String getWindowHandle3 = getWebDriver().getWindowHandle();
         Set<String> getWindowHandle3Set = getWebDriver().getWindowHandles();
-        topFunction.waitGoWindowElementCl(VidD, VidNum);
+
+        VidD.click();
+        sleep(3000);
+        topFunction.GoWindow(getWindowHandle3);
+        sleep(3000);
+        VidNum.click();
 
 
         getWebDriver().switchTo().window(getWindowHandle3);
@@ -67,7 +72,13 @@ public class Dep_UO {
         getWebDriver().findElement(tbNlsD).sendKeys(Nls);
 
         sleep(2000);
-        topFunction.waitGoWindowElementCl(tbSum, Ок);
+
+        String getWindowHandle4 = getWebDriver().getWindowHandle();
+        tbSum.click();
+        sleep(2000);
+        topFunction.GoWindow(getWindowHandle4);
+        sleep(2000);
+        Ок.click();
 
         getWebDriver().switchTo().window(getWindowHandle3);
         $(tbSum).shouldBe(Condition.visible).sendKeys(Sum);
@@ -77,9 +88,10 @@ public class Dep_UO {
         Selenide.sleep(3000);
 
         getWebDriver().switchTo().window(getWindowHandle3);
-        sleep(3000);
-        topFunction.waitGoWindowElementCl(Ок, getWindowHandle3Set);
-
+        sleep(2000);
+        topFunction.GoWindow(getWindowHandle3);
+        sleep(2000);
+        Ок.click();
 
         getWebDriver().switchTo().window(getWindowHandle3);
         getWebDriver().findElement(btExit).click();

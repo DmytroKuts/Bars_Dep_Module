@@ -7,9 +7,9 @@ import org.openqa.selenium.By;
 import java.util.concurrent.TimeUnit;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.WebDriverRunner.url;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static com.codeborne.selenide.WebDriverRunner.url;
 
 public   class LoginPage {
     private SelenideElement txtUserName = $(By.id("txtUserName"));

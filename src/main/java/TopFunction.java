@@ -19,9 +19,6 @@ public class TopFunction {
         }
     }
 
-    void MaxWindow() {
-        getWebDriver().manage().window().maximize();
-    }
 
     Select GetSelect(SelenideElement element) {
         Select select = new Select(element);
@@ -31,6 +28,7 @@ public class TopFunction {
     void waitGoWindowElementCl(SelenideElement Element1, SelenideElement Element2) {
         //sleep(4000);
         Set<String> oldWindowsSet = getWebDriver().getWindowHandles();
+        sleep(2000);
         Element1.click();
         sleep(2000);
         Set<String> newWindowsSet = getWebDriver().getWindowHandles();

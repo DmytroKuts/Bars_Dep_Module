@@ -36,7 +36,6 @@ public class RegistratContract {
 
         sleep(2000);
         getSelect(listCurrency.shouldBe(Condition.visible)).selectByValue(listCurrencyAc);
-        //select.selectByValue(listCurrencyAc);
 
         sleep(1000);
         getSelect(listContractType);
@@ -49,11 +48,8 @@ public class RegistratContract {
 
         sleep(4000);
         String getWindowHandle2 = getWebDriver().getWindowHandle();
-        //btnAccounts.click();
 
-        //sleep(4000);
         topFunction.waitGoWindowElementCl(btnAccounts, ValAcc);
-        //getWebDriver().findElement(ValAcc).click();
 
         getWebDriver().switchTo().window(getWindowHandle2);
         getWebDriver().switchTo().frame($(By.id("mainFrame")));

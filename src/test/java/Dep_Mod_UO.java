@@ -20,19 +20,19 @@ public class Dep_Mod_UO {
         dep_UO.open_Dep_UO();
     }
     @Test
-    public void сreateDep_UO_999999999() {
+    public void сreateDep_UO_MaxSum() {
         Dep_UO dep_UO = new Dep_UO();
         dep_UO.registrat_Dep_UO("98116101", "4", "980", "2600830282", "9999999999", "2");
         }
 
     @Test
-    public void сreateDep_UO_5() {
+    public void сreateDep_UO_MinSum() {
         Dep_UO dep_UO2 = new Dep_UO();
         dep_UO2.registrat_Dep_UO("98116101", "4", "980", "2600830282", "1", "2");
     }
 
     @Test
-    public void CreateDep_UO_NULL() {
+    public void CreateDep_UO_NullValue() {
         Dep_UO dep_UO3 = new Dep_UO();
         Assert.assertEquals(dep_UO3.registrat_Dep_UO_All_Null(), "Is Displayed = truetruetruetruetrue");
     }
