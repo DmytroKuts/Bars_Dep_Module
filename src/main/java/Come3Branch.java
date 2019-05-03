@@ -1,28 +1,31 @@
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class Come3Branch {
-    WebDriver driver ;
-    TopFunction topFunction;
 
+    private SelenideElement btnBranches1 = $(By.id("btnBranches"));
+    private SelenideElement btnBranchesSl = $x("//div[@id='treeview']//ul[@class = 'k-group']//span[@class='k-icon k-plus']");   // //span [contains(text(),' /300465/ ')]/ancestor-or-self::span/preceding-sibling::span[@class = 'k-icon k-plus']"
+    private SelenideElement btnBranches2 = $x("//*[@id='treeview_tv_active']/ul/li[1]/div/span[1]");
+    private SelenideElement btnBranches3 = $x("//*[@id='treeview_tv_active']/ul/li/div/span/span[1]");
+    private SelenideElement btnBranches4 = $x("//*[@id='treeview_tv_active']/ul/li[1]/div/span[2]/span[1]");
 
-    public Come3Branch(WebDriver driver) { this.driver = driver;
-    this.topFunction = new TopFunction(this.driver);}
+    public Come3Branch сome3Branch(Number branch) {
+        if(branch.equals(2)) {
+            btnBranches1.shouldBe(Condition.visible).click();
+            btnBranchesSl.shouldBe(Condition.visible).click();
+            btnBranches4.shouldBe(Condition.visible).click();
+        }
+        else {
+            btnBranches1.shouldBe(Condition.visible).click();
+            btnBranchesSl.shouldBe(Condition.visible).click();
+            btnBranches2.shouldBe(Condition.visible).click();
+            btnBranches3.shouldBe(Condition.visible).click();
+        }
+            return new Come3Branch();
 
-    private By btnBranches1 = By.xpath("//a[@id='btnBranches']");
-    private By btnBranchesSl = By.xpath("//div[@id='treeview']//ul[@class = 'k-group']//span[@class='k-icon k-plus']");
-    private By btnBranches2 = By.xpath("//*[@id='treeview_tv_active']/ul/li[1]/div/span[1]");
-    private By btnBranches3 = By.xpath("//*[@id='treeview_tv_active']/ul/li/div/span/span[1]");
-
-
-    public Come3Branch сome3Branch (){
-        topFunction.VoidXpath60sec(btnBranches1);
-        driver.findElement(btnBranches1).click() ;
-        driver.findElement(btnBranchesSl).click();
-        topFunction.VoidXpath10sec(btnBranches2);
-        driver.findElement(btnBranches2).click();
-        topFunction.VoidXpath10sec(btnBranches3);
-        driver.findElement(btnBranches3).click();
-        return new Come3Branch(driver);
     }
-    }
+}

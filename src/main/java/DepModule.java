@@ -1,47 +1,62 @@
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+
 public class DepModule {
 
-    WebDriver driver ;
-    TopFunction topFunction;
+    private SelenideElement ArmWorkWithCust = $x("//div[@class ='menuTitle']//td[contains(text(), 'АРМ Робота з клієнтом')]");
+    private SelenideElement StartWorkWithCust = $(By.id("oper-4495"));
+    private SelenideElement btContracts = $(By.id("btContracts"));
+    private SelenideElement textClientCode = $(By.id("textClientCode"));
+    private SelenideElement btSearch = $(By.id("btSearch"));
+    private SelenideElement ddlSearchClient = $(By.id("ddlSearchClient"));
+    private SelenideElement btClientCard = $(By.id("btClientCard"));
+    private static Select select;
 
-    public DepModule (WebDriver driver) { this.driver = driver;
-        this.topFunction = new TopFunction(this.driver);
+
+    public DepModule depModule(String url) {
+        if (url.equals("http://10.10.17.40:8080/barsroot/")) {
+            openCustCard("0000000000", "319791901");
+        } else if (url.equals("http://10.10.17.22:8080/barsroot/") ||
+                  (url.equals("http://10.10.17.24:8080/barsroot/") ||
+                  (url.equals("http://10.10.17.40:8082/barsroot/") ||
+                        (url.equals("http://10.10.10.198:11111/barsroot/"))))) {
+            openCustCard("0000000000", "96281701");
+        } else {
+            openCustCard("0000000000", "97709601");  //для "http://10.10.17.50:8080/barsroot/"
+        }
+        return new DepModule();
     }
 
-    private By ArmWorkWithCust = By.xpath("//div[@class ='menuTitle']//td[contains(text(), 'АРМ Робота з клієнтом ')]");
-    private By StartWorkWithCust = By.xpath("//div [@id ='oper-4495']");
-    private By textClientCode = By.xpath("//*[@id='textClientCode']");
-    private By btSearch = By.xpath("//*[@id='btSearch']");
-    private By ddlSearchClient = By.xpath("//*[@id='ddlSearchClient']");
-    private By btClientCard = By.xpath("//*[@id='btClientCard']");
-    private  static Select select;
 
+    private DepModule openCustCard(String okpo, String customerRnk) {
 
-    public DepModule openCustCard (String okpo, String customerRnk){
+        sleep(5000);
 
-        topFunction.userDelay(15000);
-       // topFunction.VoidXpath60sec(ArmWorkWithCust);
-        driver.findElement(ArmWorkWithCust).click();
-        driver.findElement(StartWorkWithCust).click();
+        $(By.id("btnBranches")).waitUntil(Condition.visible, 5000);
+        ((JavascriptExecutor) getWebDriver()).executeScript("arguments[0].scrollIntoView();", ArmWorkWithCust);
 
-        driver.switchTo().frame(driver.findElement(By.id("mainFrame")));
-        topFunction.VoidXpath10sec(textClientCode);
-        driver.findElement(textClientCode).sendKeys(okpo);
-        driver.findElement(btSearch).click();
+        ArmWorkWithCust.shouldBe(Condition.visible).click();
+        StartWorkWithCust.shouldBe(Condition.visible).click();
 
-        topFunction.VoidXpath10sec(ddlSearchClient);
-        getSelect(driver.findElement(this.ddlSearchClient));
+        switchTo().frame($("#mainFrame"));
+        textClientCode.shouldBe(Condition.visible).sendKeys(okpo);
+        btSearch.click();
+
+        getSelect(ddlSearchClient);
         select.selectByValue(customerRnk);
-        topFunction.userDelay(5000);
-        driver.findElement(btClientCard).click();
-        return new DepModule(driver);
+        btClientCard.shouldBe(Condition.visible).click();
+        btContracts.shouldBe(Condition.visible).click();
+        return new DepModule();
     }
 
-    public static Select getSelect(WebElement element) {
+    public  Select getSelect(WebElement element) {
         select = new Select(element);
         return select;
     }

@@ -1,66 +1,64 @@
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.switchTo;
+
 public class RegistratCard {
-    WebDriver driver ;
-    TopFunction topFunction;
 
-    public RegistratCard(WebDriver driver) { this.driver = driver;
-        this.topFunction = new TopFunction(this.driver);
-    }
-    private  static Select select;
-    private By btContracts = By.xpath("//*[@id='btContracts']");
-    private By CardRah = By.xpath("//*[@id='__tab_TabMainContainer_TabBPK']");
-    private By CreateRah = By.xpath("//*[@id='TabMainContainer_TabBPK_btnCreateCard']");
-    private By listProductGrp = By.xpath("//*[@id='listProductGrp']");
-    private By listProjectZP = By.xpath("//*[@id='listProject']");
-    private By listCard = By.xpath("//*[@id='listCard']");
-    private By textMonths = By.xpath("//*[@id='textMonths']");
-    private By textSecretWord = By.xpath("//*[@id='textSecretWord']");
-    private By btnRegisterCard = By.xpath("//*[@id='btnRegisterCard']");
-    private By btnBack = By.xpath("//*[@id='btnBack']");
-    private By btnClientCard = By.xpath("//*[@id='btnClientCard']");
+    private static Select select;
+    private SelenideElement CardRah = $(By.id("__tab_TabMainContainer_TabBPK"));
+    private SelenideElement CreateRah = $(By.id("TabMainContainer_TabBPK_btnCreateCard"));
+    private SelenideElement listProductGrp = $(By.id("listProductGrp"));
+    private SelenideElement listCurrency = $(By.id("listCurrency"));
+    private SelenideElement listProjectZP = $(By.id("listProject"));
+    private SelenideElement listProduct = $(By.id("listProduct"));
+    private SelenideElement listCard = $(By.id("listCard"));
+    private SelenideElement textMonths = $(By.id("textMonths"));
+    private SelenideElement textSecretWord = $(By.id("textSecretWord"));
+    private SelenideElement btnRegisterCard = $(By.id("btnRegisterCard"));
+    private SelenideElement btnBack = $(By.id("btnBack"));
 
-    public RegistratCard registratCard (String ProductGrp, String ProjectZP, String CardName, String MonthsOpenCard, String SecretWord ){
-        topFunction.VoidXpath60sec(btContracts);
-        driver.findElement(btContracts).click();
+    public RegistratCard registratCard(String ProductGrp,String ProjectZP,String Currency, String listProduct, String CardName, String MonthsOpenCard, String SecretWord) {
 
-        topFunction.VoidXpath10sec(CardRah);
-        driver.findElement(CardRah).click();
+        CardRah.click();
+        CreateRah.click();
 
-        topFunction.VoidXpath10sec(CreateRah);
-        driver.findElement(CreateRah).click();
-
-        topFunction.VoidXpath10sec(listProductGrp);
-        getSelect(driver.findElement(this.listProductGrp));
+        getSelect((this.listProductGrp).shouldBe(Condition.visible));
         select.selectByValue(ProductGrp);
 
-        topFunction.userDelay(3000);
-        getSelect(driver.findElement(this.listProjectZP));
+        sleep(2000);
+        getSelect((this.listProjectZP).shouldBe(Condition.visible));
         select.selectByValue(ProjectZP);
 
-        topFunction.userDelay(3000);
-        getSelect(driver.findElement(this.listCard));
+        sleep(2000);
+        getSelect((this.listCurrency).shouldBe(Condition.visible));
+        select.selectByValue(Currency);
+
+        sleep(2000);
+        getSelect((this.listProduct).shouldBe(Condition.visible));
+        select.selectByValue(listProduct);
+
+        sleep(2000);
+        getSelect((this.listCard).shouldBe(Condition.visible));
         select.selectByValue(CardName);
 
-        topFunction.userDelay(3000);
-        driver.findElement(textMonths).sendKeys(MonthsOpenCard);
-        driver.findElement(textSecretWord).sendKeys(SecretWord);
-        driver.findElement(btnRegisterCard).click();
+        sleep(2000);
+        textMonths.shouldBe(Condition.visible).clear();
+        textMonths.shouldBe(Condition.visible).sendKeys(MonthsOpenCard);
+        textSecretWord.sendKeys(SecretWord);
+        btnRegisterCard.click();
 
-        topFunction.userDelay(5000);
-        driver.switchTo().alert().accept();
+        sleep(2000);
+        switchTo().alert().accept();
 
-        topFunction.VoidXpath10sec(btnBack);
-        driver.findElement(btnBack).click();
+        btnBack.click();
 
-        topFunction.VoidXpath10sec(btnClientCard);
-        driver.findElement(btnClientCard).click();
-
-
-        return new RegistratCard(driver);
+        return new RegistratCard();
     }
 
     public static Select getSelect(WebElement element) {

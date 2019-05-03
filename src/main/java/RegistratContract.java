@@ -1,81 +1,63 @@
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
+import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+
 public class RegistratContract {
-    WebDriver driver ;
     TopFunction topFunction;
-    private  static Select select;
+    private static Select select;
 
-    public RegistratContract(WebDriver driver) { this.driver = driver;
-        this.topFunction = new TopFunction(this.driver);
+    public RegistratContract() {
+        this.topFunction = new TopFunction();
     }
-    //private String mainWindow = driver.getWindowHandle();
-    private By btContracts = By.xpath("//*[@id='btContracts']");
-    private By btCreateContract = By.xpath("//*[@id='TabMainContainer_TabDeposit_TabDepositContainer_TabContractMain_btCreateContract']");
-    private By listTypes = By.xpath("//*[@id='listTypes']");
-    private By listCurrency = By.xpath("//*[@id='listCurrency']");
-    private By listContractType = By.xpath("//*[@id='listContractType']");
-    private By textContractSum = By.xpath("//*[@id='textContractSum']");
-    private By btnAccounts = By.xpath("//*[@id='btnAccounts']");
-    private By btnSubmit = By.xpath("//*[@id='btnSubmit']");
-    private By ValAcc = By.xpath("//tr[@id='r_1']/td[2]");     //td[contains(text(), '26209503197919')
-    private By btNext = By.xpath("//*[@id='btNext']");
-    private By textContractNumber = By.xpath("//*[@id='textContractNumber']");
-    private By eadPrintContract_ibPrint = By.xpath("//*[@id='eadPrintContract_ibPrint']");
 
+    private SelenideElement btCreateContract = $(By.id("TabMainContainer_TabDeposit_TabDepositContainer_TabContractMain_btCreateContract"));
+    private SelenideElement listTypes = $(By.id("listTypes"));
+    private SelenideElement listCurrency = $(By.id("listCurrency"));
+    private SelenideElement listContractType = $(By.id("listContractType"));
+    private SelenideElement textContractSum = $(By.id("textContractSum"));
+    private SelenideElement btnAccounts = $(By.id("btnAccounts"));
+    private SelenideElement btnSubmit = $(By.id("btnSubmit"));
+    private SelenideElement ValAcc = $x("//tr[@id='r_1']/td[3]");
+    private SelenideElement btNext = $(By.id("btNext"));
+    private SelenideElement lbInfo = $(By.id("lbInfo"));
 
-    public RegistratContract кegistratContract (String listTypesAc, String listCurrencyAc, String listContractTypeAc, String textContractSumAc){
-        //String getWindowHandle = driver.getWindowHandle();
+    public RegistratContract кegistratContract(String listTypesAc, String listCurrencyAc, String listContractTypeAc, String textContractSumAc) {
 
-        topFunction.VoidXpath60sec(btContracts);
-        driver.findElement(btContracts).click();
-
-        topFunction.VoidXpath60sec(btCreateContract);
-        driver.findElement(btCreateContract).click();
-
-        topFunction.VoidXpath60sec(listTypes);
-        getSelect(driver.findElement(this.listTypes));
+        btCreateContract.shouldBe(Condition.visible).click();
+        sleep(1000);
+        getSelect(listTypes);
         select.selectByValue(listTypesAc);
 
-        topFunction.userDelay(3000);
-        getSelect(driver.findElement(this.listCurrency));
-        select.selectByValue(listCurrencyAc);
+        sleep(2000);
+        getSelect(listCurrency.shouldBe(Condition.visible)).selectByValue(listCurrencyAc);
 
-        topFunction.userDelay(3000);
-        getSelect(driver.findElement(this.listContractType));
+        sleep(1000);
+        getSelect(listContractType);
         select.selectByValue(listContractTypeAc);
 
-        topFunction.userDelay(3000);
-        driver.findElement(textContractSum).clear();
-        driver.findElement(textContractSum).sendKeys(textContractSumAc);
-        driver.findElement(btnSubmit).click();
+        sleep(5000);
+        textContractSum.clear();
+        textContractSum.sendKeys(textContractSumAc);
+        btnSubmit.click();
 
+        sleep(4000);
+        String getWindowHandle2 = getWebDriver().getWindowHandle();
 
-        topFunction.VoidXpath60sec(btnAccounts);
-        String getWindowHandle2 = driver.getWindowHandle();
-        //String getWindowHandle3 = driver.getPageSource();
-        driver.findElement(btnAccounts).click();
-        for(String windowsHandles : driver.getWindowHandles()){
-            if(!windowsHandles.equals(getWindowHandle2)){
-                driver.switchTo().window(windowsHandles);
-               // driver.manage().window().maximize();
-            }
-            driver.switchTo().window(windowsHandles);
-        }
+        topFunction.waitGoWindowElementCl(btnAccounts, ValAcc);
 
-        topFunction.userDelay(3000);
-        driver.findElement(ValAcc).click();
+        getWebDriver().switchTo().window(getWindowHandle2);
+        getWebDriver().switchTo().frame($(By.id("mainFrame")));
+        btNext.shouldBe(Condition.visible).click();
 
-        topFunction.userDelay(3000);
+        Assert.assertEquals( "Картка вкладу №", lbInfo.getText());
 
-        driver.switchTo().window(getWindowHandle2);
-        driver.switchTo().frame(driver.findElement(By.id("mainFrame")));
-        driver.findElement(btNext).click();
-
-
-        return new RegistratContract(driver);
+        return new RegistratContract();
     }
 
     public static Select getSelect(WebElement element) {
