@@ -2,9 +2,7 @@ import com.codeborne.selenide.Selenide;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import java.util.logging.Logger;
-
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.WebDriverRunner.url;
 
@@ -12,6 +10,7 @@ public class Dep_Mod_FO {
 
     @BeforeClass
     public static void BeforeClassMethod() {
+
         LoginPage loginPage = new LoginPage();
         Logger log = Logger.getLogger(Dep_Mod_FO.class.getName());
         log.info("*** Старт логина ФО***");
